@@ -1,19 +1,3 @@
-* 🐺 **CN cyber-wolf branding**
-* Attractive intro
-* Feature list
-* Built-in trackers
-* Screenshots section (you can add later)
-* Installation guide
-* Example usage
-* Philosophy section (CLI lovers)
-* Contribution section
-
-You can **copy this directly into `README.md`** in your GitHub repo.
-
----
-
-# README.md
-
 # 🐺 CN-JournalForge
 
 > **Terminal-first productivity system for people who prefer keyboards over dashboards.**
