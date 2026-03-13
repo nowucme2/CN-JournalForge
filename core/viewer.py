@@ -1,37 +1,40 @@
 import sqlite3
 import json
-from rich.table import Table
 from rich.console import Console
+from rich.table import Table
 
 console = Console()
 DB = "data/journal.db"
 
-def view_table():
+
+def view_specific_table(table_name):
 
     conn = sqlite3.connect(DB)
     c = conn.cursor()
 
-    tables = c.execute(
-        "SELECT id,table_name FROM tables"
-    ).fetchall()
+    row = c.execute(
+        "SELECT id FROM tables WHERE table_name=?",
+        (table_name,)
+    ).fetchone()
 
-    for t in tables:
-        console.print(f"{t[0]} - {t[1]}")
+    if not row:
+        console.print("[red]Table not found[/red]")
+        return
 
-    tid = int(input("Table ID: "))
+    table_id = row[0]
 
     rows = c.execute(
         "SELECT data FROM entries WHERE table_id=?",
-        (tid,)
+        (table_id,)
     ).fetchall()
 
     if not rows:
-        console.print("No entries")
+        console.print("[yellow]No entries yet[/yellow]")
         return
 
     data_list = [json.loads(r[0]) for r in rows]
 
-    table = Table()
+    table = Table(title=table_name)
 
     for col in data_list[0].keys():
         table.add_column(col)
@@ -40,3 +43,5 @@ def view_table():
         table.add_row(*[str(v) for v in row.values()])
 
     console.print(table)
+
+    conn.close()
