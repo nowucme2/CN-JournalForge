@@ -7,26 +7,31 @@ console = Console()
 
 DB = "data/journal.db"
 
-def add_entry():
+
+def add_entry_to_table(table_name):
 
     conn = sqlite3.connect(DB)
     c = conn.cursor()
 
-    tables = c.execute(
-        "SELECT id,table_name FROM tables"
-    ).fetchall()
+    table = c.execute(
+        "SELECT id FROM tables WHERE table_name=?",
+        (table_name,)
+    ).fetchone()
 
-    for t in tables:
-        console.print(f"{t[0]} - {t[1]}")
+    if not table:
+        console.print("[red]Table not found[/red]")
+        return
 
-    tid = Prompt.ask("Select table ID")
+    table_id = table[0]
 
     fields = c.execute(
         "SELECT field_name FROM fields WHERE table_id=?",
-        (tid,)
+        (table_id,)
     ).fetchall()
 
     data = {}
+
+    console.print(f"[cyan]Adding entry to {table_name}[/cyan]")
 
     for f in fields:
 
@@ -35,10 +40,10 @@ def add_entry():
 
     c.execute(
         "INSERT INTO entries(table_id,data) VALUES (?,?)",
-        (tid,json.dumps(data))
+        (table_id,json.dumps(data))
     )
 
     conn.commit()
     conn.close()
 
-    console.print("[green]Entry added[/green]")
+    console.print("[green]Entry added successfully[/green]")
