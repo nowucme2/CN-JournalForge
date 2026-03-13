@@ -1,3 +1,25 @@
+<p align="center">
+
+<img src="docs/cn_journalforge_banner.png" width="100%">
+
+</p>
+
+<h1 align="center">🐺 CN-JournalForge</h1>
+
+<p align="center">
+Terminal-First Productivity & Logging System
+</p>
+
+<p align="center">
+Built for developers, pentesters, and terminal lovers.
+</p>
+
+<p align="center">
+<b>Created by Abhi@CN</b>
+</p>
+
+---
+
 # 🐺 CN-JournalForge
 
 > **Terminal-first productivity system for people who prefer keyboards over dashboards.**
