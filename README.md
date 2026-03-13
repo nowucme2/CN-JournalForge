@@ -1,6 +1,6 @@
 <p align="center">
 
-<img src="Doc/cn_journalforge_banner.png" width="60%">
+<img src="Doc/cn_journalforge_banner.png" width="40%">
 
 </p>
 
